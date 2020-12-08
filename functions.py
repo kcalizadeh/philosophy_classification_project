@@ -1,13 +1,37 @@
 import pandas as pd
 import requests
 import numpy as np
-from nltk import sent_tokenize
-from nltk.corpus import stopwords
+import pickle
 import re
 import json
 import string
 import matplotlib.pyplot as plt
 import wordcloud
+
+from imblearn.over_sampling import SMOTE
+from imblearn.pipeline import Pipeline
+
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.feature_selection import SelectKBest
+from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder, StandardScaler
+from sklearn.metrics import confusion_matrix, plot_confusion_matrix
+from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier
+
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
+from sklearn.naive_bayes import BernoulliNB, BaseEstimator, BaseNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score
+
+
+from nltk import sent_tokenize
+from nltk.corpus import stopwords
+
+import pickle
 
 
 # gets text from a gutenberg URL
@@ -34,7 +58,7 @@ def tokenize_text(text):
         quote = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff\xad\x0c6§\[\]\\\£\Â\n\r]', '', quote)
         quote = re.sub(r'[0123456789]', ' ', quote)
         for char in string.punctuation:
-            quote = quote.replace(char, '')
+            quote = quote.replace(char, '').replace(' asa ', ' as a ')
         cleaned_sentences.append(quote)
     # remove unnecessary spaces
     cleaned_sentences = [x.strip() for x in cleaned_sentences]
@@ -64,12 +88,12 @@ def make_word_cloud(text, stopwords=stopwords.words('english')):
                             color_func=lambda *args, **kwargs: (0,0,0)).generate(text)
     return cloud
 
-def plot_pretty_cf(predictor, xtest, ytest, cmap='Blues', normalize='true', title=None):
+def plot_pretty_cf(predictor, xtest, ytest, cmap='Greys', normalize='true', title=None):
     fig, ax = plt.subplots(figsize=(8, 8))
     plot_confusion_matrix(predictor, xtest, ytest, cmap=cmap, normalize=normalize, ax=ax)
-    ax.set_title(title, size='x-large')
-    ax.set_yticklabels(['Functional', 'Functional \nNeeds Repair', 'Non-Functional'])
-    ax.set_xticklabels(['Functional', 'Functional \nNeeds Repair', 'Non-Functional'])
+    ax.set_title(title, size='xx-large', pad=20)
+    ax.set_xticklabels([str(x).replace('_', ' ').title()[12:-2] for x in ax.get_xticklabels()], rotation=35)
+    ax.set_yticklabels([str(x).replace('_', ' ').title()[12:-2] for x in ax.get_yticklabels()])
     ax.set_xlabel('Predicted Label', size='large')
     ax.set_ylabel('True Label', size='large')
     plt.show()
