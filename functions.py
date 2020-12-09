@@ -7,6 +7,7 @@ import json
 import string
 import matplotlib.pyplot as plt
 import wordcloud
+import seaborn as sns
 
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
@@ -22,14 +23,16 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, Gradien
 from sklearn.naive_bayes import BernoulliNB, BaseEstimator, BaseNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import plot_confusion_matrix, classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 
 
-from nltk import sent_tokenize
+from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
+from nltk import FreqDist
+from nltk.collocations import *
 
 import pickle
 
@@ -58,7 +61,7 @@ def tokenize_text(text):
         quote = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff\xad\x0c6§\[\]\\\£\Â\n\r]', '', quote)
         quote = re.sub(r'[0123456789]', ' ', quote)
         for char in string.punctuation:
-            quote = quote.replace(char, '').replace(' asa ', ' as a ')
+            quote = quote.replace(char, ' ').replace(' asa ', ' as a ')
         cleaned_sentences.append(quote)
     # remove unnecessary spaces
     cleaned_sentences = [x.strip() for x in cleaned_sentences]
@@ -85,15 +88,15 @@ def make_word_cloud(text, stopwords=stopwords.words('english')):
                             background_color='#D1D1D1', 
                             max_words=30, 
                             stopwords=stopwords, 
-                            color_func=lambda *args, **kwargs: (0,0,0)).generate(text)
+                            color_func=lambda *args, **kwargs: (95,95,95)).generate(text)
     return cloud
 
 def plot_pretty_cf(predictor, xtest, ytest, cmap='Greys', normalize='true', title=None):
     fig, ax = plt.subplots(figsize=(8, 8))
     plot_confusion_matrix(predictor, xtest, ytest, cmap=cmap, normalize=normalize, ax=ax)
-    ax.set_title(title, size='xx-large', pad=20)
+    ax.set_title(title, size='xx-large', pad=20, fontweight='bold')
     ax.set_xticklabels([str(x).replace('_', ' ').title()[12:-2] for x in ax.get_xticklabels()], rotation=35)
     ax.set_yticklabels([str(x).replace('_', ' ').title()[12:-2] for x in ax.get_yticklabels()])
-    ax.set_xlabel('Predicted Label', size='large')
-    ax.set_ylabel('True Label', size='large')
+    ax.set_xlabel('Predicted Label', size='x-large')
+    ax.set_ylabel('True Label', size='x-large')
     plt.show()

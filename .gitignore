@@ -5,3 +5,4 @@ __pycache__
 data.pkl
 random_forest.pkl
 preprocessing_copy.ipynb
+dict.pkl
