@@ -106,3 +106,15 @@ def classify_text(to_classify):
     tf_idf_input = vectorizer.transform(to_classify)
     prediction = nb_model.predict(tf_idf_input.todense())[0].replace('_', ' ').title()
     print(f'The school of philosophy most similar to your text is {prediction}')
+
+def make_w2v(series, stopwords=None, size=200, window=5, min_count=5, workers=-1, epochs=20):
+    sentences = series.map(word_tokenize)
+    cleaned_sentences = []
+    for sentence in list(sentences):
+        cleaned = [x.lower() for x in sentence if x.lower() not in stopwords]
+        cleaned_sentences.append(cleaned)
+    model = Word2Vec(list(cleaned_sentences), size=size, window=window, min_count=min_count, workers=workers)
+    model.train(cleaned_sentences, total_examples=model.corpus_count, epochs=epochs)
+    model_wv = model.wv
+    return model_wv
+    

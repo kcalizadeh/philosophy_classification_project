@@ -19,6 +19,7 @@ Our data spans about 45 texts representing 8 schools of thought. Those schools a
 - Phenomenology
 - Analytic Philosophy
 - Continental Philosophy
+
 Many of the texts are taken from the Project Gutenberg corpus. Others come from pdfs that have been transformed into .txt files for processing. This transformation unfortunately left errors in the data that needed to be cleaned, with mixed success.
 
 ### EDA

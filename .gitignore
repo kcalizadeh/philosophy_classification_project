@@ -1,9 +1,9 @@
 phil_txts
 sandbox.ipynb
 __pycache__
-.ipynb_checkpoints
 data.pkl
 NB_model.pkl
 random_forest.pkl
 preprocessing_copy.ipynb
 dict.pkl
+vectorizer.pkl
