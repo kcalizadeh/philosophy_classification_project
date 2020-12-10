@@ -2,7 +2,7 @@
 # Philosophy Text Classification
 Philosophy may seem like an esoteric discipline, but at it's core a philosophy is an attempt to rationally organize one's worldview. That being the case, if we can identify the features of a school of thought, we can identify a worldview. In this project we use NLP to explore the features of 8 schools of thought from the history of Western philosophy. 
 
-##### Repo Contents
+#### Repo Contents
 - a notebook containing EDA such as word clouds and frequency charts. The same notebook contains our Bayesian and Random Forest models. 
 - a notebook containing our work on bigrams and word2vec modeling. 
 - a notebook containing preliminary deep NLP modeling. 
@@ -24,15 +24,16 @@ Many of the texts are taken from the Project Gutenberg corpus. Others come from 
 ### EDA
 Below are word frequency charts for the overall dataset, as well as for each individual school. For the schools we eliminated to the top 50 common words to get a better picture of the individual schools. 
 
-
-
+![title](pictures/school_word_frequency_chart.png)
 
 Bigram charts can also be found below for each school.
+
+![title](pictures/school_bigram_chart.png)
 
 ### Modeling
 We were able to achieve 79% accuracy in categorizing sentences from the corpus with a Multinomial Naive Bayes model after correcting for class imbalance via SMOTE. Below is a confusion matrix for the Bayesian model.
 
-
+![title](pictures/Bayesian_CF.png)
 
 While Random Forest methods were unable to achieve the same accuracy (only about 68%), they were able to give us an insight into feature importances, charted below.
 
@@ -46,5 +47,5 @@ There are a number of tasks that would help improve our models or add new featur
 
 - Finally, as a kind of extreme goal, we'd like to build a generative model that could create text in the style of a philosopher or paraphrase given text in the style or worldview of a given school.
 
-
+Thank you!
 

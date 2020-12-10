@@ -78,13 +78,6 @@ def tokenize_text(text):
     cleaned_sentences = [x.lower() for x in cleaned_sentences]
     return cleaned_sentences
 
-
-stopwords_list = stopwords.words('english')
-custom_stopwords = ['–', 'also', 'something', 'cf', 'thus', 'two', 'now', 'would', 'make', 'eb', 'u', 'well', 'even', 'said', 'eg', 'us',
-                    'n', 'sein', 'e', 'da', 'therefore', 'however', 'would', 'thing', 'must', 'merely', 'way', 'since', 'latter', 'first',
-                    'B', 'A', 'mean', 'upon', 'yet', 'cannot', 'c', 'C', 'let', 'may', 'might']
-stopwords_list += custom_stopwords
-
 def make_word_cloud(text, stopwords=stopwords.words('english')):
     cloud = wordcloud.WordCloud(width=2000, 
                             height=1100, 
@@ -103,3 +96,13 @@ def plot_pretty_cf(predictor, xtest, ytest, cmap='Greys', normalize='true', titl
     ax.set_xlabel('Predicted Label', size='x-large')
     ax.set_ylabel('True Label', size='x-large')
     plt.show()
+
+def classify_text(to_classify):
+    with open('NB_model.pkl', 'rb') as f:
+        nb_model = pickle.load(f)
+    with open('vectorizer.pkl', 'rb') as f:
+        vectorizer = pickle.load(f)
+    to_classify = [to_classify]
+    tf_idf_input = vectorizer.transform(to_classify)
+    prediction = nb_model.predict(tf_idf_input.todense())[0].replace('_', ' ').title()
+    print(f'The school of philosophy most similar to your text is {prediction}')
