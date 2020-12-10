@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import wordcloud
 import seaborn as sns
 
+from gensim.models import Word2Vec
+
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 
@@ -33,6 +35,7 @@ from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import FreqDist
 from nltk.collocations import *
+import nltk
 
 import pickle
 
