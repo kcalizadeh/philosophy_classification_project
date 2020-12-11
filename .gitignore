@@ -1,6 +1,6 @@
 phil_txts
 sandbox.ipynb
-__pycache__
+__pycache__/*
 data.pkl
 NB_model.pkl
 random_forest.pkl
