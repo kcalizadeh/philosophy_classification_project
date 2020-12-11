@@ -38,6 +38,8 @@ We were able to achieve 79% accuracy in categorizing sentences from the corpus w
 
 While Random Forest methods were unable to achieve the same accuracy (only about 68%), they were able to give us an insight into feature importances, charted below.
 
+![title](pictures/feat_importance.png)
+
 ### Future Work
 There are a number of tasks that would help improve our models or add new features to our work:
 - Clean the data more thoroughly. Due to the way the text was formatted after being shifted from pdfs, the data was less than ideally clean, and in ways that were quite difficult to clean - many words would be fused with others or split apart in the text ('aconcept' for 'a concept').

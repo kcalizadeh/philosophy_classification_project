@@ -97,7 +97,7 @@ def plot_pretty_cf(predictor, xtest, ytest, cmap='Greys', normalize='true', titl
     ax.set_ylabel('True Label', size='x-large')
     plt.show()
 
-def classify_text(to_classify):
+def classify_text_NB(to_classify):
     with open('NB_model.pkl', 'rb') as f:
         nb_model = pickle.load(f)
     with open('vectorizer.pkl', 'rb') as f:
