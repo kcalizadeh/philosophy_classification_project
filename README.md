@@ -8,6 +8,7 @@ Philosophy may seem like an esoteric discipline, but at it's core a philosophy i
 - a notebook containing [preliminary deep NLP modeling.](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/deep_nlp.ipynb) 
 - a notebook where you can [input text and have it classified](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/user_input_classifier.ipynb) according to our model.
 - a [function.py file](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/functions.py) of functions used in the project.
+- a [powerpoint presentation](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/Philosophy_Text_Classification.pdf) summarizing the findings.
 
 ### Data Sources
 Our data spans about 45 texts representing 8 schools of thought. Those schools are:
