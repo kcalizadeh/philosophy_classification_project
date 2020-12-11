@@ -105,13 +105,13 @@ def classify_text(to_classify, model, vectorizer, verbose=5):
     class_names = ['analytic', 'continental', 'phenomenology', 'german_idealism', 'plato', 'aristotle', 'empiricism', 'rationalism']
     explainer = LimeTextExplainer(class_names=class_names)
     exp = explainer.explain_instance(to_classify, predictor_pipeline.predict_proba, num_features=8, labels=[0, 1, 2, 3, 4, 5, 6, 7])
-    label_dict = {}
-    for label in exp.as_map().keys():
-        for pair in exp.as_map()[label]:
-            classifier_sum = 0
-            classifier_sum += abs(pair[1])
-            label_dict[label] = classifier_sum
-    labels = sorted(label_dict, key=label_dict.get, reverse=True)[:verbose]
+    # label_dict = {}
+    # for label in exp.as_map().keys():
+    #     for pair in exp.as_map()[label]:
+    #         classifier_sum = 0
+    #         classifier_sum += abs(pair[1])
+    #         label_dict[label] = classifier_sum
+    # labels = sorted(label_dict, key=label_dict.get, reverse=True)[:verbose]
     exp.show_in_notebook(text=True)
 
 def make_w2v(series, stopwords=None, size=200, window=5, min_count=5, workers=-1, epochs=20):
