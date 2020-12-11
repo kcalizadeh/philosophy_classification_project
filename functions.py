@@ -29,7 +29,11 @@ from sklearn.metrics import plot_confusion_matrix, classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
+from sklearn.pipeline import make_pipeline
 
+import lime
+from lime import lime_text
+from lime.lime_text import LimeTextExplainer
 
 from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
@@ -38,7 +42,6 @@ from nltk.collocations import *
 import nltk
 
 import pickle
-
 
 # gets text from a gutenberg URL
 def get_guten(url):
@@ -97,15 +100,19 @@ def plot_pretty_cf(predictor, xtest, ytest, cmap='Greys', normalize='true', titl
     ax.set_ylabel('True Label', size='x-large')
     plt.show()
 
-def classify_text_NB(to_classify):
-    with open('NB_model.pkl', 'rb') as f:
-        nb_model = pickle.load(f)
-    with open('vectorizer.pkl', 'rb') as f:
-        vectorizer = pickle.load(f)
-    to_classify = [to_classify]
-    tf_idf_input = vectorizer.transform(to_classify)
-    prediction = nb_model.predict(tf_idf_input.todense())[0].replace('_', ' ').title()
-    print(f'The school of philosophy most similar to your text is {prediction}')
+def classify_text(to_classify, model, vectorizer, verbose=5):
+    predictor_pipeline = make_pipeline(vectorizer, model) 
+    class_names = ['analytic', 'continental', 'phenomenology', 'german_idealism', 'plato', 'aristotle', 'empiricism', 'rationalism']
+    explainer = LimeTextExplainer(class_names=class_names)
+    exp = explainer.explain_instance(to_classify, predictor_pipeline.predict_proba, num_features=8, labels=[0, 1, 2, 3, 4, 5, 6, 7])
+    label_dict = {}
+    for label in exp.as_map().keys():
+        for pair in exp.as_map()[label]:
+            classifier_sum = 0
+            classifier_sum += abs(pair[1])
+            label_dict[label] = classifier_sum
+    labels = sorted(label_dict, key=label_dict.get, reverse=True)[:verbose]
+    exp.show_in_notebook(text=True, labels=labels)
 
 def make_w2v(series, stopwords=None, size=200, window=5, min_count=5, workers=-1, epochs=20):
     sentences = series.map(word_tokenize)
