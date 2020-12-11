@@ -3,11 +3,11 @@
 Philosophy may seem like an esoteric discipline, but at it's core a philosophy is an attempt to rationally organize one's worldview. That being the case, if we can identify the features of a school of thought, we can identify a worldview. In this project we use NLP to explore the features of 8 schools of thought from the history of Western philosophy. 
 
 #### Repo Contents
-- a notebook containing EDA such as word clouds and frequency charts. The same notebook contains our Bayesian and Random Forest models. 
-- a notebook containing our work on bigrams and word2vec modeling. 
-- a notebook containing preliminary deep NLP modeling. 
-- a notebook where you can input text and have it classified according to our model.
-- a function.py file of functions used in the project.
+- a [notebook containing EDA](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/EDA_and_NB_model.ipynb) such as word clouds and frequency charts. The same notebook contains our Bayesian and Random Forest models. 
+- a notebook containing our [work on bigrams and word2vec modeling. ](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/bigrams_and_w2v.ipynb)
+- a notebook containing [preliminary deep NLP modeling.](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/deep_nlp.ipynb) 
+- a notebook where you can [input text and have it classified](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/user_input_classifier.ipynb) according to our model.
+- a [function.py file](https://github.com/kcalizadeh/philosophy_classification_project/blob/main/functions.py) of functions used in the project.
 
 ### Data Sources
 Our data spans about 45 texts representing 8 schools of thought. Those schools are:
@@ -51,4 +51,3 @@ There are a number of tasks that would help improve our models or add new featur
 - Finally, as a kind of extreme goal, we'd like to build a generative model that could create text in the style of a philosopher or paraphrase given text in the style or worldview of a given school.
 
 Thank you!
-

@@ -112,7 +112,7 @@ def classify_text(to_classify, model, vectorizer, verbose=5):
             classifier_sum += abs(pair[1])
             label_dict[label] = classifier_sum
     labels = sorted(label_dict, key=label_dict.get, reverse=True)[:verbose]
-    exp.show_in_notebook(text=True, labels=labels)
+    exp.show_in_notebook(text=True)
 
 def make_w2v(series, stopwords=None, size=200, window=5, min_count=5, workers=-1, epochs=20):
     sentences = series.map(word_tokenize)
