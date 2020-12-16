@@ -39,9 +39,14 @@ from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import FreqDist
 from nltk.collocations import *
-import nltk
+import nltk 
+
+import pkg_resources
+from symspellpy.symspellpy import SymSpell
 
 import pickle
+
+
 
 # gets text from a gutenberg URL
 def get_guten(url):
